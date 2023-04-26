@@ -7,11 +7,23 @@
     <title>Document</title>
   </head>
   <body>
-    <% data.forEach((item) => { %>
     <div style="display: flex">
-      <p style="margin: auto 10px"><%= item.rank %></p>
-      <h1><%= item.keyword %></h1>
+      <div>
+        <% naver.forEach((item) => { %>
+        <div style="display: flex">
+          <p style="margin: auto 10px"><%= item.rank %></p>
+          <h1><%= item.keyword %></h1>
+        </div>
+        <% }) %>
+      </div>
+      <div>
+        <% street11.forEach((item) => { %>
+        <div style="display: flex">
+          <p style="margin: auto 10px"><%= item.rank %></p>
+          <h1><%= item.keyword %></h1>
+        </div>
+        <% }) %>
+      </div>
     </div>
-    <% }) %>
   </body>
 </html>

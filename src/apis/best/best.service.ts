@@ -1,29 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBestDto } from './dto/create-best.dto';
 import { UpdateBestDto } from './dto/update-best.dto';
-import cheerio from 'cheerio';
-import axios from 'axios';
+import { CrawlersService } from '../crawlers/crawlers.service';
 
 @Injectable()
 export class BestService {
+  constructor(private readonly crawlerService: CrawlersService) {}
   create(createBestDto: CreateBestDto) {
     return 'This action adds a new best';
   }
 
   async findAll() {
-    const url =
-      'https://search.shopping.naver.com/best/category/keyword?categoryCategoryId=ALL&categoryDemo=A00&categoryRootCategoryId=ALL&chartRank=1&period=P1D';
-    const naverHtml = await axios.get(url);
-    const $ = cheerio.load(naverHtml.data);
-
-    $(
-      '#container > div > div > div > div.category_panel > div > ul > li > a',
-    ).each((i, elem) => {
-      console.log(i);
-      console.log($(elem).html());
-    });
-
-    return [];
+    const naverBestKeyword = await this.crawlerService.naverBestCrawler();
+    const street11BestKeyword = await this.crawlerService.street11BestCrawler();
+    return { naver: naverBestKeyword, street11: street11BestKeyword };
   }
 
   findOne(id: number) {

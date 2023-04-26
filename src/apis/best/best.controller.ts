@@ -24,12 +24,9 @@ export class BestController {
   @Get()
   @Render('best')
   async findAll() {
-    let data = await this.bestService.findAll();
-    data = [
-      { keyword: 'aaa', rank: 1 },
-      { keyword: 'bbb', rank: 2 },
-    ];
-    return { data };
+    const { naver, street11 } = await this.bestService.findAll();
+    console.log(naver);
+    return { naver, street11 };
   }
 
   @Get(':id')
