@@ -24,9 +24,9 @@ export class BestController {
   @Get()
   @Render('best')
   async findAll() {
-    const { naver, street11 } = await this.bestService.findAll();
+    const { naver, street11, gmarket } = await this.bestService.findAll();
     console.log(naver);
-    return { naver, street11 };
+    return { naver, street11, gmarket };
   }
 
   @Get(':id')

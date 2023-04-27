@@ -24,6 +24,14 @@
         </div>
         <% }) %>
       </div>
+      <div>
+        <% gmarket.forEach((item) => { %>
+        <div style="display: flex">
+          <p style="margin: auto 10px"><%= item.rank %></p>
+          <h1><%= item.keyword %></h1>
+        </div>
+        <% }) %>
+      </div>
     </div>
   </body>
 </html>

@@ -13,7 +13,13 @@ export class BestService {
   async findAll() {
     const naverBestKeyword = await this.crawlerService.naverBestCrawler();
     const street11BestKeyword = await this.crawlerService.street11BestCrawler();
-    return { naver: naverBestKeyword, street11: street11BestKeyword };
+    const gmarketBestKeyword = await this.crawlerService.gmarketBestCrawler();
+    console.log(gmarketBestKeyword);
+    return {
+      naver: naverBestKeyword,
+      street11: street11BestKeyword,
+      gmarket: gmarketBestKeyword,
+    };
   }
 
   findOne(id: number) {

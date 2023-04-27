@@ -54,4 +54,32 @@ export class CrawlersService {
     browser.close();
     return street11Data;
   }
+
+  async gmarketBestCrawler() {
+    const gmarketData = [];
+
+    const url = 'https://m.gmarket.co.kr/#tab_keyword';
+    const browser = await puppeteer.launch({
+      headless: false,
+    });
+    const page = await browser.newPage();
+    // 페이지의 크기를 설정한다.
+    await page.setViewport({
+      width: 375,
+      height: 768,
+    });
+    await page.goto(url);
+    await page.click('header > div > div.box__top-search > div > button');
+    const content = await page.content();
+
+    const $ = cheerio.load(content);
+    $('ul > li > a.link__hot-keyword').each((i, elem) => {
+      const keyword = $(elem).children('.text__title').text();
+      const rank = Number($(elem).children('.text__rank').text());
+      gmarketData.push({ keyword, rank });
+    });
+    browser.close();
+    console.log(gmarketData);
+    return gmarketData;
+  }
 }
